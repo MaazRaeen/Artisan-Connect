@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -7,17 +8,23 @@ export default function LoginPage() {
     password: '',
   })
   const navigate = useNavigate()
+  const { login, loginAsGuest } = useAuth()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const { username, password } = formData
 
-    if (username === 'admin' && password === '12345') {
-      alert('Login successful!')
+    if (username === 'Maaz' && password === 'localArt') {
+      login({ username, role: 'Admin' })
       navigate('/')
     } else {
       alert('Invalid credentials')
     }
+  }
+
+  const handleGuestLogin = () => {
+    loginAsGuest()
+    navigate('/')
   }
 
   const handleChange = (e) => {
@@ -32,8 +39,11 @@ export default function LoginPage() {
       <div className="w-full max-w-md space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign in to your account
+            Welcome to Artisan Connect
           </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Sign in as admin or continue as guest
+          </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="-space-y-px rounded-md shadow-sm">
@@ -69,12 +79,19 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div>
+          <div className="flex flex-col space-y-4">
             <button
               type="submit"
               className="group relative flex w-full justify-center rounded-md bg-primary-600 px-3 py-2 text-sm font-semibold text-white hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
             >
-              Sign in
+              Sign in as Admin
+            </button>
+            <button
+              type="button"
+              onClick={handleGuestLogin}
+              className="group relative flex w-full justify-center rounded-md bg-gray-100 px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+            >
+              Continue as Guest
             </button>
           </div>
         </form>
