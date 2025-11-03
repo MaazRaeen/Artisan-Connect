@@ -10,10 +10,14 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // TODO: Implement actual authentication
-    console.log('Login attempt:', formData)
-    alert('Login successful!')
-    navigate('/')
+    const { username, password } = formData
+
+    if (username === 'admin' && password === '12345') {
+      alert('Login successful!')
+      navigate('/')
+    } else {
+      alert('Invalid credentials')
+    }
   }
 
   const handleChange = (e) => {
