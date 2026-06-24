@@ -399,5 +399,6 @@ For more information, visit: [www.artisanconnect.com](https://www.artisanconnect
 - All artisans using the platform
 
 ---
+## give me an ⭐️ or you will face consicounses ##
 
 **Made with ❤️ by the Artisan Connect Team**
